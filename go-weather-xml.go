@@ -30,19 +30,17 @@ func main() {
     }
 }
 
-
+// Get Weather Hacaks
 func getWeather(feed string) (p *WeatherHack, err error) {
 
     res, err := http.Get(feed)
     if err != nil {
-        log.Fatalf("Log: %v", err)
-        return
+        return nil, err
     }
 
     b, err := ioutil.ReadAll(res.Body)
     if err != nil {
-        log.Fatalf("Log: %v", err)
-        return
+        return nil, err
     }
     wh := new(WeatherHack)
     err = xml.Unmarshal(b, &wh)
